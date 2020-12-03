@@ -25,3 +25,6 @@ The administrator then applies PPP authentication using the server groups. In th
    2. Apply the rule to a specific interface if login rule isn't named default with the following commands:<br>
 ```line [aux | console | tty | vty] start_number end_number```<br>
 ```login authentication [list-name]```<br>
+
+**IMPORTANT**<br>
+The additional methods of authentication are used only if the previous method returns an error, not if it fails. To specify that the authentication should succeed even if all methods return an error, specify none as the final method in the command line.<br>
