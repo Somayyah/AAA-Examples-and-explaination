@@ -19,3 +19,9 @@ The TACACS+ server group “tac2only” is defined as follows using the aaa grou
 ```server 172.16.2.77```<br>
 The administrator then applies PPP authentication using the server groups. In this example, the default methods list for PPP authentication follows this order: group rad2only, group tac2only, and local:<br>
 ```aaa authentication ppp default group rad2only group tac2only local```<br>
+**aaa login authentication steps**<br>
+1- Write the login authentication rule with the following command:
+```aaa authentication login [ default | method_name ] auth_method_1 auth_method_2 ... auth_method_N```<br>
+2- Apply the rule to a specific interface if login rule isn't named default with the following commands:
+```line [aux | console | tty | vty] start_number end_number```<br>
+```login authentication [menthod_name]```<br>
