@@ -34,7 +34,7 @@ To enable password as the login authentication method enter the following comman
 ```aaa authentication login default enable```<br>
 
 **Create special authentication groups**<br>
-```aaa group server radius loginrad```<br>
+```aaa group server [method_name] [group_name]```<br>
 ```server X```<br>
 ```server Y```<br>
 ```server Z```<br>
