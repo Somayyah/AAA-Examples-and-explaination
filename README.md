@@ -21,7 +21,7 @@ The administrator then applies PPP authentication using the server groups. In th
 ```aaa authentication ppp default group rad2only group tac2only local```<br><br>
 **aaa login authentication steps**<br>
 1- Write the login authentication rule with the following command:
-```aaa authentication login [ default | method_name ] auth_method_1 auth_method_2 ... auth_method_N```<br>
+```aaa authentication login [ default | list-name ] auth_method_1 auth_method_2 ... auth_method_N```<br>
 2- Apply the rule to a specific interface if login rule isn't named default with the following commands:
 ```line [aux | console | tty | vty] start_number end_number```<br>
-```login authentication [menthod_name]```<br>
+```login authentication [list-name]```<br>
