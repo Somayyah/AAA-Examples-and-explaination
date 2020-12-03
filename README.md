@@ -6,6 +6,16 @@ Connection type: PPP<br>
 default: applied to all interfaces unless a specific method is specefied to said interface<br>
 First authentication method: group tacacs which can contain multiple TACACS Servers<br>
 Second authentication method: group radius which can contain multiple RADIUS Servers<br>
-Third authentication method: local, user name and password<br>
-```#aaa authentication ppp method1 group tacacs group radius local```<br><br>
-Applicable only when specefied on an interface<br>
+Third authentication method: local, user name and password<br><br>
+```#aaa authentication ppp method1 group tacacs group radius local```<br>
+Applicable only when specefied on an interface<br><br>
+
+**Example From AAA guide by Cisco**<br>
+The system administrator uses server groups to specify that only R2 (172.16.2.7) and T2 (172.16.2.77) are valid servers for PPP authentication. To do this, the administrator must define specific server groups whose members are , respectively. In this example, the RADIUS server group “rad2only” is defined as follows using the aaa group server command:<br>
+```aaa group server radius rad2only```<br>
+```server 172.16.2.7```<br>
+The TACACS+ server group “tac2only” is defined as follows using the aaa group server command:<br>
+```aaa group server tacacs+ tac2only```<br>
+```server 172.16.2.77```<br>
+The administrator then applies PPP authentication using the server groups. In this example, the default methods list for PPP authentication follows this order: group rad2only, group tac2only, and local:<br>
+```aaa authentication ppp default group rad2only group tac2only local```<br>
