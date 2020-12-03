@@ -28,3 +28,13 @@ The administrator then applies PPP authentication using the server groups. In th
 
 **IMPORTANT**<br>
 The additional methods of authentication are used only if the previous method returns an error, not if it fails. To specify that the authentication should succeed even if all methods return an error, specify none as the final method in the command line.<br>
+
+**Login Authentication Using Enable Password**<br><br>
+To enable password as the login authentication method enter the following command:<br>
+```aaa authentication login default enable```<br>
+
+**Create special authentication groups**<br>
+```aaa group server radius loginrad```<br>
+```server X```<br>
+```server Y```<br>
+```server Z```<br>
