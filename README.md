@@ -85,11 +85,9 @@ ___Examples___<br>
 4. Connection
 5. System
 6. Resources<br>
-**Accounting Record Types**
-1. Stop-only: instructs the specified method (RADIUS or
-TACACS+) to send a stop record accounting notice at the end of the requested user process.
-2. Start-stop: start-stop keyword to send a start accounting notice at the beginning of the
-requested event and a stop accounting notice at the end of the event.
+**Accounting Record Types**<br>
+1. Stop-only: instructs the specified method (RADIUS or TACACS+) to send a stop record accounting notice at the end of the requested user process.
+2. Start-stop: start-stop keyword to send a start accounting notice at the beginning of the requested event and a stop accounting notice at the end of the event.
 3. none: To stop all accounting activities.<br>
 
 **Command**<br>
@@ -98,3 +96,43 @@ requested event and a stop accounting notice at the end of the event.
 ```Router(config-line)# accounting {arap | commands level | connection | exec} {default | list-name}```<br>
 ```Router(config)#interface interface-type interface-number```<br>
 ```Router(config-if)# ppp accounting { default | list-name }```<br>
+
+### EXAMPLES
+
+1. Configure a local account on R1, configure authentication on the console and vty lines using local AAA.<br>
+
+```R1(config)# username Admin1 secret admin1pa55```<br>
+```R1(config)# aaa new-model```<br>
+```R1(config)# aaa authentication login new_set local```<br>
+```R1(config)# line console 0```
+```R1(config-line)# login authentication new_set```<br>
+```R1(config-line)# end```
+
+2. Verify local AAA authentication from the R1 console and the PC-A client.<br>
+,,,,,,,,,,,<br>
+3. Configure Local AAA Authentication for vty Lines on R1<br>
+
+```R1(config)# ip domain-name cisco.com```<br>
+```R1(config)# crypto key generate rsa```<br>
+```R1(config)# aaa authentication login SSH-LOGIN local```<br>
+```R1(config)# line vty 0 4```<br>
+```R1(config-line)# login authentication SSH-LOGIN```
+```R1(config-line)# transport input ssh```
+
+4. Configure Server-Based AAA Authentication Using TACACS+ on R2.<br>
+```R2(config)# username Admin2 secret admin2pa55```<br>
+```R2(config)# tacacs-server host 192.168.2.2```<br>
+```R2(config)# tacacs-server key tacacspa55```<br>
+```R2(config)# aaa new-model```<br>
+```R2(config)# aaa authentication login console_list group tacacs+ local```<br>
+```R2(config)# line console 0```<br>
+```R2(config-line)# login authentication console_list```<br>
+
+5. Configure Server-Based AAA Authentication Using RADIUS on R3.<br>
+
+```R3(config)# username Admin3 secret admin3pa55```<br>
+```R3(config)# radius-server host 192.168.3.2```<br>
+```R3(config)# radius-server key KEY```<br>
+```R3(config)# aaa authentication login default group radius local```<br>
+```R3(config)# console line 0```<br>
+```R3(config-line)# login authentication default```
