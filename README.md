@@ -43,7 +43,7 @@ To enable password as the login authentication method enter the following comman
 
 ### AAA Authorization
 
-**aaa authorization types**
+**aaa authorization types**<br>
 
 1. commands: For EXEC mode commands. EXEC modes are split into two types, user and privilaged modes. Command authorization attempts authorization for all EXEC mode commands, including global configuration commands, associated with a specific privilege level.
 2. EXEC: Applies to the attributes associated with a user.
@@ -56,3 +56,45 @@ To create a method list to enable authorization for **all network-related servic
 To create a method list to enable authorization to determine **if a user is allowed to run an EXEC shell**, use the exec keyword.<br>
 To create a method list to enable authorization **for specific, individual EXEC commands associated with a specific privilege level**, use the commands keyword. (This allows you to authorize all commands associated
 with a specified command level from 0 to 15.)<br>
+
+**Commands**<br>
+```Router(config)# aaa authorization {auth-proxy | network | exec | commands level | reverse-access | configuration | ipmobile} {default | list-name} [method1 [method2...]]```<br>
+```Router(config)# line [aux | console | tty | vty] line-number [ending-line-number]```<br>
+```interface interface-type interface-number```<br>
+```Router(config-line)# authorization{arap | commands level | exec | reverse-access} {default | list-name}```<br>
+```Router(config-line)# aaa authorization {default | list-name}```<br>
+___Examples___<br>
+
+1. Show how to use a TACACS+ server to authorize the use of network services, including PPP and ARA. If the TACACS+ server is not available or an error occurs during the authorization process, the fallback method (none) is to grant all authorization requests.<br>
+```Router(config)# aaa authorization network default group tacacs+ none```<br>
+2. Shows how to allow network authorization using TACACS+.<br>
+```Router(config)# aaa authorization network default group tacacs+```<br>
+3. Shows how to configure the router to authorize using RADIUS.<br>
+```Router(config)# aaa new-model```<br>
+```Router(config)# aaa authorization exec default group radius if-authenticated```<br>
+```Router(config)# aaa authorization network default group radius```<br>
+```Router(config)# radius-server host IP```<br>
+```Router(config)# radius-server key KEY```<br>
+
+### AAA Accounting
+
+**AAA Accounting Types**<br>
+1. Network
+2. EXEC
+3. Command
+4. Connection
+5. System
+6. Resources<br>
+**Accounting Record Types**
+1. Stop-only: instructs the specified method (RADIUS or
+TACACS+) to send a stop record accounting notice at the end of the requested user process.
+2. Start-stop: start-stop keyword to send a start accounting notice at the beginning of the
+requested event and a stop accounting notice at the end of the event.
+3. none: To stop all accounting activities.<br>
+
+**Command**<br>
+```Router(config)#aaa accounting [ network | exec | system | commands level | resource ] [ default | list_name ] [ start-stop | stop-only | none ] method1 method2 ...```<br>
+```Router(config)# line [aux | console | tty | vty] line-number [ending-line-number]```<br>
+```Router(config-line)# accounting {arap | commands level | connection | exec} {default | list-name}```<br>
+```Router(config)#interface interface-type interface-number```<br>
+```Router(config-if)# ppp accounting { default | list-name }```<br>
