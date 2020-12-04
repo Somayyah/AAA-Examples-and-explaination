@@ -40,3 +40,19 @@ To enable password as the login authentication method enter the following comman
 ```server Z```<br><br>
 **Enabling Password Protection at the Privileged Level**<br>
 ```aaa authentication enable default method1 [ method2... ]```<br><br>
+
+### AAA Authorization
+
+**aaa authorization types**
+
+1. commands: For EXEC mode commands. EXEC modes are split into two types, user and privilaged modes. Command authorization attempts authorization for all EXEC mode commands, including global configuration commands, associated with a specific privilege level.
+2. EXEC: Applies to the attributes associated with a user.
+3. Network: Applies to network connections. This can include a PPP, SLIP, or ARAP connection.
+4. IP mobile: Applies to authorization for IP mobile services.
+5. Configuration: Applies to downloading configurations from the AAA server.
+6. Reverse Access: Applies to reverse Telnet sessions.<br>
+
+To create a method list to enable authorization for **all network-related service requests** (including SLIP, PPP,PPP NCPs, and ARAP), use the network keyword.<br>
+To create a method list to enable authorization to determine **if a user is allowed to run an EXEC shell**, use the exec keyword.<br>
+To create a method list to enable authorization **for specific, individual EXEC commands associated with a specific privilege level**, use the commands keyword. (This allows you to authorize all commands associated
+with a specified command level from 0 to 15.)<br>
